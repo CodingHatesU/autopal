@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { MenuIcon } from 'lucide-react'
 
 type Props = {}
 
@@ -44,11 +45,18 @@ const Navbar = async (props: Props) => {
         </ul>
       </nav>  
       <aside className='flex items-center gap-4'>
-        <Link
-          href="/dashboard"
-          className='relative inline-flex h-10 overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50'
-        >
+        <Link href="/dashboard" className="p-[03px] relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-sm px-1 py-1" />
+            <div className="px-8 py-1  bg-black rounded-sm  relative group transition duration-200 text-white hover:bg-transparent">
+              {
+                //WIP: wire up user
+                true ? 'Dashboard' : 'Get Started'
+              }
+            </div>
         </Link>
+        {//WIP: wire up user
+        }
+        <MenuIcon className='md:hidden'/>
       </aside>
     </header>
   )
