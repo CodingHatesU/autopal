@@ -1,6 +1,6 @@
  'use client'
 import React, { useRef } from 'react'
-import { useScroll, useTransform, motion } from 'framer-motion'
+import { useScroll, useTransform, motion, fillOffset } from 'framer-motion'
 import Image from 'next/image'
 
 export const ContainerScroll = ({
@@ -93,7 +93,8 @@ export const Card = ({
       <div className="bg-gray-100 h-full w-full rounded-2xl  gap-4 overflow-hidden p-4 transition-all ">
         <Image
           src="/temp-banner.png"
-          fill
+          height={1000}
+          width={1000}
           alt="bannerImage"
           className="object-cover border-8 rounded-2xl"
         />
