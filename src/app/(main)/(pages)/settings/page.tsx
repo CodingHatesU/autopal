@@ -5,7 +5,36 @@ import ProfilePicture from './_components/profile-picture'
 type Props = {}
 
 const Settings = (props: Props) => {
-  //WIP: Wire up profile pic
+
+  // const removeProfileImage = async () => {
+  //   'use server'
+  //   const response = await db.user.update({
+  //     where: {
+  //       clerkId: authUser.id,
+  //     },
+  //     data: {
+  //       profileImage: '',
+  //     },
+  //   })
+  //   return response
+  // }
+
+  // const uploadProfileImage = async (image: string) => {
+  //   'use server'
+  //   const id = authUser.id
+  //   const response = await db.user.update({
+  //     where: {
+  //       clerkId: id,
+  //     },
+  //     data: {
+  //       profileImage: image,
+  //     },
+  //   })
+
+  //   return response
+  // }
+
+
   return (
     <div className='flex flex-col gap-4'>
       <h1 className='flex justify-between items-center sticky top-0 z-[10] border-b bg-background/50 p-6 text-4xl backdrop-blur-lg'>
@@ -21,9 +50,9 @@ const Settings = (props: Props) => {
           Add or update your information
         </p>
       </div>
-      <ProfilePicture>
+      {/* <ProfilePicture>
         
-      </ProfilePicture>
+      </ProfilePicture> */}
       <ProfileForm/>
     </div>
   )
