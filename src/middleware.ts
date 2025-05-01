@@ -1,4 +1,4 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { clerkMiddleware, auth, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from 'next/server';
 
 const publicRoutes = [
@@ -6,8 +6,11 @@ const publicRoutes = [
   '/api/clerk-webhook',
   '/api/drive-activity/notification',
   '/api/payment/success',
+  '/sign-in(.*)',
+  '/sign-up(.*)',
 ];
 
+// Define your ignored routes (routes that bypass Clerk middleware entirely)
 const ignoredRoutes = [
   '/api/auth/callback/discord',
   '/api/auth/callback/notion',
@@ -16,28 +19,20 @@ const ignoredRoutes = [
   '/api/cron/wait',
 ];
 
-export default clerkMiddleware((auth, req) => {
-  const path = req.nextUrl.pathname;
-  
-  // Check if the route should be ignored
-  if (ignoredRoutes.some(route => path.startsWith(route))) {
-    return NextResponse.next();
+
+const isPublicRoute = createRouteMatcher([
+  ...publicRoutes,
+  ...ignoredRoutes
+]);
+
+
+export default clerkMiddleware( async (auth, req) => {
+  if (!isPublicRoute(req)) {
+    await auth.protect(); // Protect the route if it matches the defined criteria
   }
-  
-  // Check if the route is public
-  if (publicRoutes.some(route => path === route)) {
-    return NextResponse.next();
-  }
-  
-  // For protected routes, auth check is automatically handled by Clerk
 });
 
  
 export const config = {
-  matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
-    '/(api|trpc)(.*)',
-  ],
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 };

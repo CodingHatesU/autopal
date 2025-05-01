@@ -5,7 +5,7 @@ import '@uploadcare/react-uploader/core.css'
 import { useRouter } from 'next/navigation'
 
 type Props = {
-  onUpload: (e: string) => any
+  onUpload: (e: string) => any  
 }
 
 const UploadCareButton = ({ onUpload }: Props) => {
@@ -25,7 +25,7 @@ const UploadCareButton = ({ onUpload }: Props) => {
   return (
     <div>
       <FileUploaderRegular
-        pubkey="a9428ff5ff90ae7a64eb" // Keep your original pubkey
+        pubkey="560d42e02996969cf3f0" // Keep your original pubkey
         sourceList="local, camera, facebook, gdrive"
         classNameUploader="uc-light"
         onUploaded={handleUpload}
