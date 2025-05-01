@@ -1,14 +1,17 @@
 import React from 'react'
-
+import Sidebar from '@/components/sidebar'
+import InfoBar from '@/components/infobar'
 type Props = {
   children: React.ReactNode
 }
 
-function Layout({children}: Props) {
+function Layout(props: Props) {
   return (
     <div className='flex overflow-hidden h-screen'>
+      <Sidebar/>
       <div className='w-full'>
-        {children}
+        <InfoBar/>
+        {props.children}
       </div>
     </div>
   )
